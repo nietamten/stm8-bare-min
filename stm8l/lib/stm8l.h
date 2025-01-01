@@ -220,6 +220,7 @@
 #define CLK_ECKCR_HSEON                 0
 #define CLK_SCSR                        _SFR_(0xC7)
 #define CLK_SWR                         _SFR_(0xC8)
+#define CLK_DIVR	*(unsigned char*)0x50C0
 #define CLK_SWCR                        _SFR_(0xC9)
 #define CLK_SWCR_SWIF                   3
 #define CLK_SWCR_SWIEN                  2
@@ -428,6 +429,15 @@
 #define USART1_CR5                      _SFR_(0x238)
 #define USART1_GTR                      _SFR_(0x239)
 #define USART1_PSCR                     _SFR_(0x23A)
+
+/* USART_CR3 bits */
+#define USART_CR3_LINEN (1 << 6)
+#define USART_CR3_STOP2 (1 << 5)
+#define USART_CR3_STOP1 (1 << 4)
+#define USART_CR3_CLKEN (1 << 3)
+#define USART_CR3_CPOL (1 << 2)
+#define USART_CR3_CPHA (1 << 1)
+#define USART_CR3_LBCL (1 << 0)
 
 /* TIM2 */
 #define TIM2_CR1                        _SFR_(0x250)
