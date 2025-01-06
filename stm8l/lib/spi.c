@@ -3,10 +3,10 @@
 
 void SPI_init() {
 
-    //NSS OUT LOW
+    //NSS OUT HIGH
     PB_DDR |= (1 << 4);
     PB_CR1 |= (1 << 4);
-    PB_ODR &= ~(1 << 4);
+    PB_ODR |= (1 << 4);
 
     //SCK OUT
     PB_DDR |= (1 << 5);
@@ -23,14 +23,30 @@ void SPI_init() {
     SPI1_CR1 |= (1<<SPI1_CR1_SPE); // SPE, SPI Enable, Peripheral enabled
 }
 
-uint8_t SPI_read() {
-    SPI_write(0xFF);
-    while (!(SPI1_SR & (1 << SPI1_SR_RXNE)));
-    return SPI1_DR;
+void SPI_NSS_UP()
+{
+    PB_ODR |= (1 << 4);
 }
 
-void SPI_write(uint8_t data) {
+void SPI_NSS_DOWN()
+{
+    PB_ODR &= ~(1 << 4);
+}
+
+void SPI_disable()
+{
+    SPI1_CR1 &= ~(1<<SPI1_CR1_SPE); // Disable SPI  
+}
+
+uint8_t SPI_read() {
+    return SPI_write(0x00);
+}
+
+uint8_t SPI_write(uint8_t data) {
     while ((SPI1_SR & (1 << SPI1_SR_BSY)));
     SPI1_DR = data;  
     while (!(SPI1_SR & (1 << SPI1_SR_TXE)));
+    while (!(SPI1_SR & (1 << SPI1_SR_RXNE)));
+    return SPI1_DR;
+
 }

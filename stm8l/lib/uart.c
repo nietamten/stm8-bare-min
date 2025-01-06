@@ -25,7 +25,7 @@ void uart_write(uint8_t data){
 
 
 void uart_init(void) {
-	CLK_DIVR = 0x00; // Set the frequency to 16 MHz
+//	CLK_DIVR = 0x00; // Set the frequency to 16 MHz
 	CLK_PCKENR1 = 0xFF; // Enable peripherals
 
 	PC_DDR = 0x08; // Put TX line on

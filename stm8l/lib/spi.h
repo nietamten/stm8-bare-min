@@ -13,8 +13,11 @@
  * CS   -> user defined
  */
 void SPI_init();
+void SPI_disable();
+void SPI_NSS_UP();
+void SPI_NSS_DOWN();
 
-void SPI_write(uint8_t data);
+uint8_t SPI_write(uint8_t data);
 
 uint8_t SPI_read();
 
